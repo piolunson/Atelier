@@ -32,5 +32,16 @@
   "include": [
     "src",
     "server"
+  ],
+  // The shipped studio is the Lightcraft mask workspace. These Atelier gallery
+  // surfaces are kept in the repo for reference, but they link to routes that
+  // are not part of this build, so they are not typechecked with it.
+  "exclude": [
+    "src/components/dashboard.tsx",
+    "src/components/landing-page.tsx",
+    "src/components/shell.tsx",
+    "src/components/wizard.tsx",
+    "src/components/room-view.tsx",
+    "src/components/room-bits.tsx"
   ]
 }

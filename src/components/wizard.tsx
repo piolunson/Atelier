@@ -196,6 +196,7 @@ export function Wizard({ draftId }: { draftId: string }) {
   if (!form) return <p className="text-muted">{t("app.loading")}</p>;
 
   async function next() {
+    if (!form) return;
     if (step === 0 && form.files.length === 0) {
       toast.error(t("app.errFile"));
       return;

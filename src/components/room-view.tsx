@@ -90,7 +90,7 @@ export function ClientRoom({ slug }: { slug: string }) {
     const timer = window.setInterval(async () => {
       const status = await getPublicStatus({ data: { slug, token } }).catch(() => null);
       if (!status || status.state !== "ok" || !("files" in status)) {
-        if (status && status.state !== "ok") setState(status.state);
+        if (status) setState(status.state);
         return;
       }
       setRoom((current) => {

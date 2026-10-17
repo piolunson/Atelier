@@ -2,5 +2,5 @@
   "deploy": {
     "database": true
   },
-  "VITE_APP_NAME": "Atelier"
+  "VITE_APP_NAME": "Lightcraft"
 }

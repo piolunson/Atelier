@@ -18,6 +18,22 @@
   --color-room: #0c1220;
   --shadow-card: 0 18px 50px rgba(26, 26, 26, 0.08);
   --shadow-float: 0 12px 30px rgba(26, 26, 26, 0.12);
+
+  /* Lightcraft — the dark studio surface */
+  --color-lc-void: #08090a;
+  --color-lc-bg: #0b0d0f;
+  --color-lc-surface: #101317;
+  --color-lc-raised: #171b20;
+  --color-lc-line: #252b32;
+  --color-lc-line-strong: #343c45;
+  --color-lc-fg: #ece9e2;
+  --color-lc-muted: #929aa3;
+  --color-lc-faint: #69717a;
+  --color-lc-accent: #e2b15e;
+  --color-lc-accent-ink: #211705;
+  --color-lc-ok: #77c79b;
+  --color-lc-danger: #e08374;
+  --radius-lc: 0.75rem;
 }
 
 @layer base {
@@ -72,7 +88,8 @@
   color: var(--color-accent-ink);
   box-shadow: 0 10px 24px rgba(47, 111, 235, 0.28);
 }
-@utility btn-primary:hover {
+/* Tailwind v4 rejects variants inside `@utility` names, so the hover lift is a plain rule. */
+.btn-primary:hover {
   transform: translateY(-1px);
 }
 @utility btn-ghost {
@@ -132,6 +149,219 @@
   .masonry { columns: 4; }
 }
 .masonry > * { break-inside: avoid; margin-bottom: 0.25rem; }
+
+/* ---- Lightcraft studio chrome ------------------------------------------ */
+.lc-stage {
+  background-color: var(--color-lc-void);
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.055) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.lc-frame {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 30px 90px rgba(0, 0, 0, 0.65);
+}
+
+.lc-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-lc-faint);
+}
+
+.lc-tab {
+  position: relative;
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 2.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-lc-muted);
+  transition: color 160ms ease, background 160ms ease;
+}
+.lc-tab[data-active="true"] {
+  background: var(--color-lc-raised);
+  color: var(--color-lc-fg);
+}
+.lc-tab:hover { color: var(--color-lc-fg); }
+
+.lc-chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.25rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-lc-line);
+  background: var(--color-lc-raised);
+  color: var(--color-lc-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: border-color 160ms ease, color 160ms ease;
+}
+.lc-chip-btn:hover {
+  border-color: var(--color-lc-line-strong);
+  color: var(--color-lc-fg);
+}
+
+.lc-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.55rem;
+  color: var(--color-lc-muted);
+  transition: background 160ms ease, color 160ms ease;
+}
+.lc-icon-btn:hover:not(:disabled) {
+  background: var(--color-lc-raised);
+  color: var(--color-lc-fg);
+}
+.lc-icon-btn:disabled { opacity: 0.35; }
+
+.lc-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  color: var(--color-lc-muted);
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+.lc-tool:hover { background: var(--color-lc-raised); color: var(--color-lc-fg); }
+.lc-tool[data-active="true"] {
+  background: var(--color-lc-raised);
+  color: var(--color-lc-accent);
+  box-shadow: inset 0 0 0 1px var(--color-lc-line-strong);
+}
+
+.lc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 0.6rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+.lc-btn:active { transform: translateY(1px); }
+.lc-btn-primary {
+  background: var(--color-lc-accent);
+  color: var(--color-lc-accent-ink);
+}
+.lc-btn-primary:hover { background: #ecc173; }
+.lc-btn-quiet {
+  border: 1px solid var(--color-lc-line);
+  background: transparent;
+  color: var(--color-lc-fg);
+}
+.lc-btn-quiet:hover { border-color: var(--color-lc-line-strong); background: var(--color-lc-raised); }
+
+.lc-selectable {
+  user-select: text;
+}
+
+.lc-range {
+  width: 100%;
+  height: 1.25rem;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.lc-range::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-lc-line-strong);
+}
+.lc-range::-moz-range-track {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-lc-line-strong);
+}
+.lc-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  margin-top: -5px;
+  border-radius: 999px;
+  background: var(--color-lc-fg);
+  box-shadow: 0 0 0 3px var(--color-lc-surface);
+}
+.lc-range::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-lc-fg);
+  box-shadow: 0 0 0 3px var(--color-lc-surface);
+}
+.lc-range:focus-visible { outline: none; }
+.lc-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px var(--color-lc-surface), 0 0 0 5px var(--color-lc-accent); }
+
+.lc-dialog-shadow {
+  box-shadow:
+    0 0 0 1px var(--color-lc-line),
+    0 40px 120px rgba(0, 0, 0, 0.7);
+}
+
+.lc-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 60;
+  display: flex;
+  width: min(94vw, 41rem);
+  max-height: min(88dvh, 52rem);
+  flex-direction: column;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  border-radius: 1rem;
+  background: var(--color-lc-surface);
+  color: var(--color-lc-fg);
+  animation: lc-rise 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.lc-dialog-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.lc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(4, 5, 6, 0.78);
+  backdrop-filter: blur(6px);
+  animation: lc-fade 180ms ease both;
+}
+
+@keyframes lc-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lc-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.lc-rise { animation: lc-rise 240ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes lc-soft-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+.lc-soft-pulse { animation: lc-soft-pulse 2.4s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

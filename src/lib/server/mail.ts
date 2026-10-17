@@ -3,10 +3,10 @@ import { t } from "@/lib/i18n";
 
 function esc(value: string): string {
   return value
-    .replaceAll("&", "&")
-    .replaceAll("<", "<")
-    .replaceAll(">", ">")
-    .replaceAll('"', """);
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function shell(paragraphs: string[], cta?: { href: string; label: string }): string {

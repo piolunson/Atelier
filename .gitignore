@@ -36,3 +36,4 @@ Thumbs.db
 .grok/og-pending
 screenshots/
 artifacts/
+dev-server.log
