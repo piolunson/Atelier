@@ -1,0 +1,6 @@
+{
+  "deploy": {
+    "database": true
+  },
+  "VITE_APP_NAME": "Atelier"
+}
